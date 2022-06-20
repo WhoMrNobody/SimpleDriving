@@ -85,9 +85,9 @@ public class MainMenuController : MonoBehaviour
 
             DateTime energyReady = DateTime.Now.AddMinutes(energyRechargeDuration);
             PlayerPrefs.SetString(EnergyReadKey, energyReady.ToString());
-#if UNITY_ANDROID                                               
+/*#if UNITY_ANDROID                                               
             notificationController.ScheduleNotification(energyReady);
-#endif
+#endif*/
 
         }
 

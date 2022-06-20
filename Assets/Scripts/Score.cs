@@ -20,6 +20,7 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!GameController.gameController.isGameStarted){return;}
         score += Time.deltaTime * 2;
 
         scoreText.text = Mathf.FloorToInt(score).ToString();
