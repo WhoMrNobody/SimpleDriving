@@ -5,34 +5,40 @@ using TMPro;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] TMP_Text scoreText;
+    [SerializeField] public TMP_Text scoreText;
 
     public const string HighScoreKey = "HighScore";
 
-    float score;
+    Car car;
 
-    // Start is called before the first frame update
+    public float scorePoints;
+
+    private void Awake() {
+
+        car = FindObjectOfType<Car>();
+    }
     void Start()
-    {
+    {   
         scoreText.text="0";
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        if(!GameController.gameController.isGameStarted){return;}
-        score += Time.deltaTime * 2;
+        if(!GameController.gameController.isGameStarted){ return; }
 
-        scoreText.text = Mathf.FloorToInt(score).ToString();
+            scorePoints += Time.deltaTime * 2;
+
+            scoreText.text = Mathf.FloorToInt(scorePoints).ToString();
     }
 
     private void OnDestroy() {
 
         int currentHighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
 
-        if(score>currentHighScore){
+        if(scorePoints>currentHighScore){
 
-            PlayerPrefs.SetInt(HighScoreKey, Mathf.FloorToInt(score));
+            PlayerPrefs.SetInt(HighScoreKey, Mathf.FloorToInt(scorePoints));
         }
 
         

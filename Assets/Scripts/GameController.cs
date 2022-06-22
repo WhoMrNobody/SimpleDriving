@@ -1,31 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] GameObject gameStartText;
-
+    [SerializeField] public GameObject gameStartText_;
     public static GameController gameController;
-
     public bool isGameStarted=false;
+    public bool isGameFailed=false;
+    public CarStartingPos carStorageValue;
+    public Vector3 carPos;
+    public AsyncOperation nextSceneAsync;
+    ParticleSystem finishEffectLeft;
+    ParticleSystem finishEffectRight;
+    public int activeScene;
+    Car car;
 
     void Awake() {
-        gameController=this;
+        
+        this.activeScene=SceneManager.GetActiveScene().buildIndex;
+
+        car = FindObjectOfType<Car>();
+
+        if(gameController==null){
+
+            gameController=this;
+            DontDestroyOnLoad(gameObject);
+
+        }else{
+            Destroy(gameObject);
+        }
+
         
     }
-    void Start()
+    void Update()
     {
+        this.activeScene=SceneManager.GetActiveScene().buildIndex;
+
+       
+        if(Input.touchCount>0){
+
+            isGameStarted=true;
+            gameStartText_.SetActive(false);
+        }
+
+    }
+
+    IEnumerator GameFinished(){
+
+        LoadNextScene();
+        car.isGameFinished=false;
+        yield return new WaitForSeconds(1f);
+        carStorageValue.carStartingPos_=carPos;
+        gameStartText_.SetActive(true);
+        
         
     }
 
-   
-    void Update()
-    {
-        if(Input.touchCount>0){
-            isGameStarted=true;
-            gameStartText.SetActive(false);
-        }
-        
+    public void LoadNextScene(){
+
+        nextSceneAsync = SceneManager.LoadSceneAsync(activeScene+1, LoadSceneMode.Single);
+        nextSceneAsync.allowSceneActivation=false;
+        gameStartText_.SetActive(true);
     }
+
 }
