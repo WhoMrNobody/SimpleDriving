@@ -42,7 +42,6 @@ public class Car : MonoBehaviour
             isGameFinished=true;
             GameController.gameController.isGameStarted=false;
             GameController.gameController.LoadNextScene();
-            GameController.gameController.nextSceneAsync.allowSceneActivation=true;
             transform.position=GameController.gameController.carStorageValue.carStartingPos_;
 
         }
