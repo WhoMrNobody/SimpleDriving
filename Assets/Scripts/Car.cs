@@ -56,6 +56,7 @@ public class Car : MonoBehaviour
 
     void RestartGame(){
 
+        Time.timeScale=0f;
         transform.rotation=startRotation;
         transform.position=GameController.gameController.carStorageValue.carStartingPos_;
         score.scoreText.text="0";

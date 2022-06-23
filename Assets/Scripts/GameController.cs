@@ -28,9 +28,13 @@ public class GameController : MonoBehaviour
 
         }else{
             Destroy(gameObject);
-        }
+        }  
+    }
 
-        
+    void Start() {
+
+        Time.timeScale=0f;
+
     }
     void Update()
     {
@@ -41,6 +45,7 @@ public class GameController : MonoBehaviour
         if(Input.touchCount>0){
 
             isGameStarted=true;
+            Time.timeScale=1f;
             gameStartText_.SetActive(false);
             gameInfoText_.SetActive(false);
         }
@@ -51,6 +56,7 @@ public class GameController : MonoBehaviour
     public void LoadNextScene(){
 
         SceneManager.LoadScene(this.activeScene+1);
+        Time.timeScale=0f;
         gameStartText_.SetActive(true);
         gameInfoText_.SetActive(true);
     }
