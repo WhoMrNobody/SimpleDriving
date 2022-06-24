@@ -32,7 +32,7 @@ public class Score : MonoBehaviour
             scoreText.text = Mathf.FloorToInt(scorePoints).ToString();
     }
 
-    private void OnDestroy() {
+    public void OnDestroy() {
 
         int currentHighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
 

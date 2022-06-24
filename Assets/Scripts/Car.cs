@@ -13,6 +13,8 @@ public class Car : MonoBehaviour
     public float maxSteeringAngle; 
     private int steerValue;
     public bool isGameFinished=false;
+
+    public bool gameOver=false;
     Quaternion startRotation;
     
     void Awake() {
@@ -43,6 +45,16 @@ public class Car : MonoBehaviour
             GameController.gameController.isGameStarted=false;
             GameController.gameController.LoadNextScene();
             transform.position=GameController.gameController.carStorageValue.carStartingPos_;
+
+        }
+
+        if(coll.CompareTag("LastFinish")){
+
+            isGameFinished=true;
+            gameOver=true;
+            GameController.gameController.isGameStarted=false;
+            SceneManager.LoadScene(0);
+            score.OnDestroy();
 
         }
         

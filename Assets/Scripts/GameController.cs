@@ -27,8 +27,8 @@ public class GameController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
         }else{
-            Destroy(gameObject);
-        }  
+           Destroy(gameObject);
+        }
     }
 
     void Start() {
@@ -39,8 +39,6 @@ public class GameController : MonoBehaviour
     void Update()
     {
         this.activeScene=SceneManager.GetActiveScene().buildIndex;
-
-        Debug.Log("In Update " + activeScene);
        
         if(Input.touchCount>0){
 
@@ -48,6 +46,10 @@ public class GameController : MonoBehaviour
             Time.timeScale=1f;
             gameStartText_.SetActive(false);
             gameInfoText_.SetActive(false);
+        }
+
+        if(car.gameOver){
+            Destroy(this.gameObject);
         }
 
     }

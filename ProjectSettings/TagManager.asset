@@ -6,6 +6,7 @@ TagManager:
   tags:
   - obstacle
   - startPos
+  - LastFinish
   layers:
   - Default
   - TransparentFX
